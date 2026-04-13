@@ -16,6 +16,30 @@ export const MenuSystem = {
 
   init() {
     // Mobile HUD buttons
+    const fsBtn = document.getElementById('fullscreen-mobile-btn');
+    if (fsBtn) {
+      fsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().then(() => {
+            if (screen.orientation && screen.orientation.lock) {
+              screen.orientation.lock('landscape').catch(err => console.log('Orient lock err:', err));
+            }
+          }).catch(err => console.log('FS err:', err));
+        } else {
+          document.exitFullscreen().catch(err => console.log('Exit FS err:', err));
+        }
+      });
+      // Update icon based on state
+      document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+          fsBtn.textContent = '🗗'; // exit fullscreen icon
+        } else {
+          fsBtn.textContent = '⛶'; // enter fullscreen icon
+        }
+      });
+    }
+
     document.getElementById('pause-mobile-btn').addEventListener('pointerdown', (e) => {
       e.stopPropagation();
       if (!this.getMainMenu().hidden) return;
