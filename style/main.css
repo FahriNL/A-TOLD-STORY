@@ -196,3 +196,45 @@ button {
 
 /* ── Hidden ── */
 [hidden] { display: none !important; }
+
+/* ── Portrait Mode Warning ── */
+#portrait-warning {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  color: var(--text);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+#portrait-warning p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+#portrait-warning .rotate-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: rotatePhone 2.5s infinite ease-in-out;
+}
+
+@keyframes rotatePhone {
+  0%, 10% { transform: rotate(0deg); }
+  40%, 60% { transform: rotate(-90deg); }
+  90%, 100% { transform: rotate(0deg); }
+}
+
+@media screen and (max-width: 900px) and (orientation: portrait) {
+  #app {
+    display: none !important;
+  }
+  #portrait-warning {
+    display: flex;
+  }
+}
