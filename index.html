@@ -64,7 +64,6 @@
 
       <!-- HUD — Pause & Inventory buttons (z-index 30) -->
       <div id="hud">
-        <button id="fullscreen-mobile-btn" class="hud-btn" aria-label="Fullscreen">⛶</button>
         <button id="pause-mobile-btn" class="hud-btn" aria-label="Pause">⏸</button>
         <button id="inventory-mobile-btn" class="hud-btn" aria-label="Inventory">🎒</button>
       </div>
@@ -89,6 +88,11 @@
 
     <!-- ── Layer 60: Title Card ── -->
     <div id="title-card" hidden></div>
+
+    <!-- ── Layer 100: Global HUD (Always on top) ── -->
+    <div id="global-hud" style="position: absolute; top: var(--safe-top); left: 12px; z-index: 100; pointer-events: auto;">
+      <button id="fullscreen-mobile-btn" class="hud-btn" aria-label="Fullscreen">⛶</button>
+    </div>
 
   </div>
 
