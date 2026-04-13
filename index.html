@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="A Told Story — Interactive narrative game engine bergaya Telltale Games.">
+  <meta name="theme-color" content="#0a0a0f">
+  <title>A Told Story</title>
+  <link rel="stylesheet" href="style/main.css?v=3">
+  <link rel="stylesheet" href="style/components.css?v=3">
+  <link rel="stylesheet" href="style/animations.css?v=3">
+  <script>
+    window.addEventListener('error', function(e) {
+      alert("JS Error: " + e.message + " di " + e.filename + ":" + e.lineno);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      alert("Promise Error: " + e.reason);
+    });
+  </script>
+</head>
+<body>
+  <!-- Fallback message jika dibuka via file:// (CORS memblokir ES Module) -->
+  <div id="cors-warning" style="display:none; position:absolute; inset:0; z-index:9999; background:#0a0a0f; color:#e8a027; text-align:center; padding-top:35dvh; font-family:sans-serif; line-height:1.6;">
+    <h1 style="margin-bottom:20px;">⚠️ Gagal Memuat Engine</h1>
+    <p style="color:#fff;">Game ini menggunakan ES6 Modules.</p>
+    <p style="color:#fff;">Anda tidak bisa membuka <b>index.html</b> secara langsung (via <code style="background:#333;padding:2px 6px;border-radius:4px;">file://</code>).</p>
+    <p style="color:#fff; margin-top:15px;">Solusi: Gunakan <b>Live Server</b> (VS Code)<br>atau jalankan <code style="background:#333;padding:2px 6px;border-radius:4px;">npx serve</code> di folder ini.</p>
+  </div>
+  <script>
+    if (window.location.protocol === 'file:') document.getElementById('cors-warning').style.display = 'block';
+  </script>
+
+  <div id="app">
+    <!-- ── Layer 1–40: Game Stage ── -->
+    <div id="game">
+
+      <!-- Backgrounds (z-index 1) -->
+      <div id="scene-bg"></div>
+
+      <!-- Portraits (z-index 2) -->
+      <div id="character-layers">
+        <div id="portrait-left"></div>
+        <div id="portrait-right"></div>
+      </div>
+
+      <!-- Dialogue (z-index 10) -->
+      <div id="dialogue-box" hidden></div>
+
+      <!-- Choices (z-index 11) -->
+      <div id="choice-wrap" hidden></div>
+
+      <!-- QTE (z-index 20) -->
+      <div id="qte-overlay" hidden class="overlay-layer"></div>
+
+      <!-- Lockpick (z-index 20) -->
+      <div id="lockpick-overlay" hidden class="overlay-layer">
+        <canvas id="lockpick-canvas"></canvas>
+      </div>
+
+      <!-- HUD — Pause & Inventory buttons (z-index 30) -->
+      <div id="hud">
+        <button id="pause-mobile-btn" class="hud-btn" aria-label="Pause">⏸</button>
+        <button id="inventory-mobile-btn" class="hud-btn" aria-label="Inventory">🎒</button>
+      </div>
+
+      <!-- Memory Toast (z-index 40) -->
+      <div id="memory-toast" hidden></div>
+
+      <!-- Transition Cover (z-index 100) -->
+      <div id="transition-cover"></div>
+    </div>
+
+    <!-- ── Layer 55: Main Menu ── -->
+    <div id="main-menu" class="menu-layer"></div>
+
+    <!-- ── Layer 50: Side Panels ── -->
+    <div id="relation-panel"  hidden class="panel-layer"></div>
+    <div id="memory-log"      hidden class="panel-layer"></div>
+    <div id="inventory-panel" hidden class="panel-layer"></div>
+
+    <!-- ── Layer 55: Pause Menu ── -->
+    <div id="pause-menu" hidden class="menu-layer"></div>
+
+    <!-- ── Layer 60: Title Card ── -->
+    <div id="title-card" hidden></div>
+
+  </div>
+
+  <script type="module" src="engine/scene.js"></script>
+</body>
+</html>
