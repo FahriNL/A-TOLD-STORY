@@ -30,6 +30,11 @@
     if (window.location.protocol === 'file:') document.getElementById('cors-warning').style.display = 'block';
   </script>
 
+  <div id="portrait-warning">
+    <div class="rotate-icon">📱</div>
+    <p>Silakan putar perangkat Anda ke mode<br><b style="color:var(--accent)">Landscape</b><br>untuk bermain.</p>
+  </div>
+
   <div id="app">
     <!-- ── Layer 1–40: Game Stage ── -->
     <div id="game">
@@ -59,6 +64,7 @@
 
       <!-- HUD — Pause & Inventory buttons (z-index 30) -->
       <div id="hud">
+        <button id="fullscreen-mobile-btn" class="hud-btn" aria-label="Fullscreen">⛶</button>
         <button id="pause-mobile-btn" class="hud-btn" aria-label="Pause">⏸</button>
         <button id="inventory-mobile-btn" class="hud-btn" aria-label="Inventory">🎒</button>
       </div>
